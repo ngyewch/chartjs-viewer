@@ -1,0 +1,29 @@
+{
+  "name": "chartjs-viewer",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "doDev": "vite",
+    "doBuild": "vite build",
+    "check": "svelte-check --tsconfig ./tsconfig.json --compiler-warnings a11y-click-events-have-key-events:ignore",
+    "watch:check": "svelte-check --tsconfig ./tsconfig.json --watch --compiler-warnings a11y-click-events-have-key-events:ignore",
+    "dev": "run-p watch:check doDev",
+    "build": "run-s check doBuild"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "3.1.2",
+    "@tsconfig/svelte": "5.0.4",
+    "npm-run-all": "4.1.5",
+    "svelte-check": "4.0.1",
+    "typescript": "5.5.4",
+    "vite": "5.4.3"
+  },
+  "dependencies": {
+    "carbon-components-svelte": "0.85.2",
+    "chart.js": "4.4.4",
+    "svelte": "4.2.19",
+    "svelte-jsoneditor": "0.23.8",
+    "svelte-splitpanes": "8.0.5"
+  }
+}
