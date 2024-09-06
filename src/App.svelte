@@ -2,6 +2,7 @@
     import {
         Header,
         SkipToContent,
+        InlineNotification,
     } from 'carbon-components-svelte';
     import {
         JSONEditor,
@@ -41,6 +42,7 @@
     let chartElement: HTMLDivElement | undefined = undefined;
     let chartCanvasElement: HTMLCanvasElement | undefined = undefined;
     let chart: Chart | undefined = undefined;
+    let errorMessage: string = '';
 
     onMount(() => {
         if (chartElement) {
@@ -76,8 +78,10 @@
         chartElement.appendChild(chartCanvasElement);
         try {
             chart = new Chart(chartCanvasElement, config);
-        } catch (e) {
+            errorMessage = '';
+        } catch (e: any) {
             console.error(e);
+            errorMessage = e.toString();
             destroyChart();
         }
 
@@ -107,7 +111,14 @@
             <JSONEditor bind:content mode={Mode.text} onChange={onChange}/>
         </Pane>
         <Pane>
-            <div bind:this={chartElement} class="chart"></div>
+            <div class="chartPane">
+                {#if errorMessage !== ''}
+                    <div>
+                        <InlineNotification kind="error" subtitle={errorMessage} hideCloseButton={true}/>
+                    </div>
+                {/if}
+                <div bind:this={chartElement} class="chart"></div>
+            </div>
         </Pane>
     </Splitpanes>
 </div>
@@ -122,5 +133,11 @@
     .chart {
         width: 100%;
         height: 100%;
+    }
+
+    .chartPane {
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
     }
 </style>
