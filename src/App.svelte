@@ -6,7 +6,6 @@
     } from 'carbon-components-svelte';
     import {
         JSONEditor,
-        Mode,
         type Content,
         type OnChangeStatus,
         type TextContent,
@@ -32,7 +31,6 @@
                 }
             },
         },
-
     };
 
     let isSideNavOpen = false;
@@ -46,16 +44,17 @@
 
     onMount(() => {
         if (chartElement) {
-            onChange(content, content, {contentErrors: null, patchResult: null});
+            onChange(content, content, {contentErrors: undefined, patchResult: undefined});
         }
     });
 
     function onChange(updatedContent: Content, previousContent: Content, status: OnChangeStatus): void {
         content = updatedContent;
-        if (status.contentErrors === null) {
+        if (status.contentErrors === undefined) {
             const chartConfig = getJSON() as ChartConfiguration;
             createChart(chartConfig);
         } else {
+            console.log('error', status.contentErrors);
             destroyChart();
         }
     }
@@ -108,7 +107,7 @@
 <div class="content">
     <Splitpanes>
         <Pane>
-            <JSONEditor bind:content mode={Mode.text} onChange={onChange}/>
+            <JSONEditor bind:content onChange={onChange}/>
         </Pane>
         <Pane>
             <div class="chartPane">
