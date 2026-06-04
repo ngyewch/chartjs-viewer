@@ -6,8 +6,8 @@
   "scripts": {
     "doDev": "vite",
     "doBuild": "vite build",
-    "check": "svelte-check --tsconfig ./tsconfig.json --compiler-warnings a11y-click-events-have-key-events:ignore",
-    "watch:check": "svelte-check --tsconfig ./tsconfig.json --watch --compiler-warnings a11y-click-events-have-key-events:ignore",
+    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
+    "watch:check": "svelte-check --tsconfig ./tsconfig.app.json --watch --compiler-warnings a11y-click-events-have-key-events:ignore",
     "dev": "run-p watch:check doDev",
     "build": "run-s check doBuild",
     "deploy": "gh-pages -d dist --nojekyll"
@@ -15,6 +15,7 @@
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "7.1.2",
     "@tsconfig/svelte": "5.0.8",
+    "@types/node": "24.12.4",
     "gh-pages": "6.3.0",
     "npm-run-all2": "9.0.1",
     "svelte-check": "4.5.0",
@@ -26,6 +27,6 @@
     "chart.js": "4.5.1",
     "svelte": "5.56.1",
     "svelte-jsoneditor": "3.12.0",
-    "svelte-splitpanes": "8.0.12"
+    "svelte-splitpanes": "8.0.9"
   }
 }
